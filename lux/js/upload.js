@@ -15,9 +15,9 @@ function getRandomNumber(min, max) { return Math.floor(Math.random() * (max - mi
 const fileName = `arquivoTemporario_${getRandomNumber(0, 999999)}`;
 if (!extension) { return fileName.toString(); }return `${fileName}.${extension}`;};
 
-exports.catBoxUpload = async (buffer) => {
+exports.catBoxUpload = async (buffer, type) => {
 const catBox = new Catbox();
-const tempPath = path.resolve("./lux", getRandomName("png"));
+const tempPath = path.resolve("./lux", getRandomName(type));
 fs.writeFileSync(tempPath, buffer);
 try {
 const response = await catBox.uploadFile({
