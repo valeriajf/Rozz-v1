@@ -73,6 +73,8 @@ await client.sendMessage(from, {image: {url: fotomenu}, caption: `╭═══�
 ┃╰══════════════════⪨
 ╰╦══════════════════⪨
 ╭┤⟪ *STICKER* ⟫
+┃│░⃟⃛🕸️༘݊➮ ${prefix}s (imagem/video/gif)
+┃│░⃟⃛🕸️༘݊➮ ${prefix}stickerai (Query)
 ┃│░⃟⃛🕸️༘݊➮ ${prefix}attp (Query)
 ┃│░⃟⃛🕸️༘݊➮ ${prefix}attp2 (Query)
 ┃│░⃟⃛🕸️༘݊➮ ${prefix}among (Query)

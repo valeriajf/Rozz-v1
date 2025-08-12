@@ -1,8 +1,8 @@
 const { prefix, botName, donoName, DarkApikey, DarkUrl, emoji } = require("../../dono/config.json")
 
 module.exports = {
-  nome: "NOME",
-  descricao: "DESCRIÇÃO",
+  nome: "adm",
+  descricao: "Comando adm",
   comandos: ["COMANDOadm", "COMANDOadm2"],
   uso: `${prefix}COMANDL`,
 

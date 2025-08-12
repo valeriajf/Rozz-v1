@@ -41,6 +41,8 @@ const verMsg = true; //True = ativo, False = desativado.
 const fotomenu = "./lux/imagem/menu.png";
 const pastaLux = "./lux/";
 const { catBoxUpload } = require("./lux/js/upload.js")
+const { imageToWebp, videoToWebp, writeExifImg, writeExifVid } = require('./lux/js/lib/exif')
+const { imageToWebp2, videoToWebp2, writeExifImg2, writeExifVid2 } = require('./lux/js/lib/exif2')
 //=======INICIO DO BOTECO=======\\
 async function ligarbot() {
 
@@ -191,8 +193,8 @@ const menc = q.replace("@", "") + "@s.whatsapp.net";
 const sender = info.key.participant || from
 const pushname = info.pushName ? info.pushName : ""
 const isDono = dono.includes(sender)
-const metadata = await lux.groupMetadata(from); 
-const participante = metadata.participants.find(p => p.id === sender); 
+const metadata = isGroup ? await lux.groupMetadata(from) : "";
+const participante = isGroup ? metadata.participants.find(p => p.id === sender) : "";
 const numeroBot = lux.user.id.split(":")[0]+"@s.whatsapp.net"
 const groupMembers = metadata ? metadata.participants : [];
 const isAdm = participante?.admin !== undefined || isDono
@@ -271,8 +273,14 @@ else if (tipoMensagem === 'Figurinha') {
   chalk.hex('#ff69b4')(`${chalk.bold(pushname)} enviou uma Figurinha em ${nomeChat}`)
  );
 }
-else {
+else if (isGroup){
  console.log(
+  chalk.hex('#cccccc')(`${chalk.bold(pushname)} enviou uma Mensagem em ${nomeChat}`) +
+  chalk.dim(` → "${body?.slice(0, 50) || '...'}"`)
+ );
+}
+else {
+console.log(
   chalk.hex('#cccccc')(`${chalk.bold(pushname)} enviou uma Mensagem em ${nomeChat}`) +
   chalk.dim(` → "${body?.slice(0, 50) || '...'}"`)
  );
@@ -320,6 +328,69 @@ await axios({method: "get", url, headers: {"DNT": 1, "Upgrade-Insecure-Request":
 resolve(res.data)
 }).catch(reject)
 })
+
+//============[ FAZER STICKER ]========//
+const sendImageAsSticker = async (lux, jid, path, quoted, options = {}) => {
+let buff = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await (await getBuffer(path)) : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0);
+ let buffer;
+ if (options && (options.packname || options.author)) {
+buffer = await writeExifImg(buff, options);
+} else {
+buffer = await imageToWebp(buff);
+}
+
+await lux.sendMessage(jid, {sticker: {url: buffer}, ...options}, {quoted})
+return buffer;
+};
+
+const sendVideoAsSticker = async (lux, jid, path, quoted, options = {}) => {
+let buff = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await (await getBuffer(path)) : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0);
+ let buffer;
+ if (options && (options.packname || options.author)) {
+buffer = await writeExifVid(buff, options);
+} else {
+buffer = await videoToWebp(buff);
+}
+
+await lux.sendMessage(jid, { sticker: { url: buffer }, ...options }, { quoted })
+return buffer;
+}
+
+const sendImageAsSticker2 = async (lux, jid, path, quoted, options = {}) => {
+let buff = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await (await getBuffer(path)) : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0);
+ let buffer;
+ if (options && (options.packname || options.author)) {
+buffer = await writeExifImg2(buff, options);
+} else {
+buffer = await imageToWebp2(buff);
+}
+
+await lux.sendMessage(jid, {sticker: {url: buffer}, ...options}, {quoted})
+return buffer;
+};
+
+const sendVideoAsSticker2 = async (lux, jid, path, quoted, options = {}) => {
+let buff = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await (await getBuffer(path)) : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0);
+ let buffer;
+ if (options && (options.packname || options.author)) {
+buffer = await writeExifVid2(buff, options);
+} else {
+buffer = await videoToWebp2(buff);
+}
+
+await lux.sendMessage(jid, { sticker: { url: buffer }, ...options }, { quoted })
+return buffer;
+}
+
+const getFileBuffer = async (mediakey, MediaType) => {
+const stream = await downloadContentFromMessage(mediakey, MediaType)
+let buffer = Buffer.from([])
+for await(const chunk of stream) {
+buffer = Buffer.concat([buffer, chunk])
+}
+return buffer
+}
+
 //ARMAZENAR GRUPO
 const pastinhaDosGrupos = './lux/json/grupos/';
 if (!fs.existsSync(pastinhaDosGrupos)){
@@ -392,7 +463,7 @@ const comando = comandos.get(comandoNome)
 if (comando.permissao === 'dono' && !isDono) return enviar(msg.dono)
 if (comando.permissao === 'adm' && !isAdm) return enviar(msg.adm)
 if (comando.permissao === 'vip' && !isPremium) return enviar(msg.vip)
-await comando.handle({ pastaLux, msg, fotomenu, lux, fetchJson, client: lux, enviar, enviarAi, reagir, reply, enviarImg, enviarImg2, enviarGif, enviarGif2, enviarVd, enviarVd2, enviarAd, enviarAd2, data, hora, esperar, selo, info, args, q, sender, from, groupMembers, numeroBot, dono, menc, pushname, isDono, isAdm, Dispositivo, isPremium, infoUser, registrarUsuario1, infoUser1, modificarsaldo, registrarAposta, modificarUsuario, carregarDadosUsuarios, latensi, uptimeBot: formatTime(process.uptime()), ModificaGrupo, ArquivosDosGrupos, catBoxUpload, fetchJson, getBuffer});
+await comando.handle({ pastaLux, msg, fotomenu, lux, fetchJson, client: lux, enviar, enviarAi, reagir, reply, enviarImg, enviarImg2, enviarGif, enviarGif2, enviarVd, enviarVd2, enviarAd, enviarAd2, data, hora, esperar, selo, info, args, q, sender, from, groupMembers, numeroBot, dono, menc, pushname, isDono, isAdm, Dispositivo, isPremium, infoUser, registrarUsuario1, infoUser1, modificarsaldo, registrarAposta, modificarUsuario, carregarDadosUsuarios, latensi, uptimeBot: formatTime(process.uptime()), ModificaGrupo, ArquivosDosGrupos, catBoxUpload, fetchJson, getBuffer, sendImageAsSticker, sendVideoAsSticker, sendImageAsSticker2, sendVideoAsSticker2, getFileBuffer});
 } else {
 lux.sendMessage(from, { text: `- *Nem mesmo as trevas entenderam esse comando...\nToque *${prefix}menu* e revele o grimório completo.*` }, { quoted: selo });
 }

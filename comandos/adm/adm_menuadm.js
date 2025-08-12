@@ -17,7 +17,9 @@ client.sendMessage(from, {image: {url: fotomenu}, caption: `╭═════�
 ╭┤⟪ *COMANDOS ADM* ⟫
 ┃│░⃟⃛🕸️༘݊➮ ${prefix}abrirgp
 ┃│░⃟⃛🕸️༘݊➮ ${prefix}fechargp
-┃│░⃟⃛🕸️༘݊➮ ${prefix}ban
+┃│░⃟⃛🕸️༘݊➮ ${prefix}marcar
+┃│░⃟⃛🕸️༘݊➮ ${prefix}citar (Query)
+┃│░⃟⃛🕸️༘݊➮ ${prefix}ban (@)
 ┃│░⃟⃛🕸️༘݊➮ ${prefix}menujogos
 ┃│░⃟⃛🕸️༘݊➮ ${prefix}auto-resposta 1/0
 ╰═══════════════════⪨` }, {quoted: selo})
