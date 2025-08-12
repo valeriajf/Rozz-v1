@@ -48,60 +48,60 @@ const { state, saveCreds } = await useMultiFileAuthState('./dono/jack-qr')
 const { version, isLatest } = await fetchLatestBaileysVersion()
 const msgRetryCounterCache = new NodeCache()
 const lux = makeWASocket({
-    version,
-    auth: {
-      creds: state.creds,
-      keys: makeCacheableSignalKeyStore(state.keys, pino({ level: 'silent' })),
-    },
-    logger: pino({ level: 'silent' }),
-    printQRInTerminal: !process.argv.includes("--code"),
-    mobile: false,
-    browser: ['Ubuntu','Edge','125.0.0.0'],
-    generateHighQualityLinkPreview: true,
-    msgRetryCounterCache,
-    connectTimeoutMs: 60000,
-    defaultQueryTimeoutMs: 0,
-    keepAliveIntervalMs: 20000,
-    patchMessageBeforeSending: (message) => {
-      const requiresPatch = !!(message.buttonsMessage || message.templateMessage || message.listMessage);
-      if (requiresPatch) {
-        message = {
-          viewOnceMessage: {
-            message: {
-              messageContextInfo: {
-                deviceListMetadataVersion: 2,
-                deviceListMetadata: {},
-              },
-              ...message,
-            },
-          },
-        };
-      }
-      return message;
-    },
-  });
+  version,
+  auth: {
+   creds: state.creds,
+   keys: makeCacheableSignalKeyStore(state.keys, pino({ level: 'silent' })),
+  },
+  logger: pino({ level: 'silent' }),
+  printQRInTerminal: !process.argv.includes("--code"),
+  mobile: false,
+  browser: ['Ubuntu','Edge','125.0.0.0'],
+  generateHighQualityLinkPreview: true,
+  msgRetryCounterCache,
+  connectTimeoutMs: 60000,
+  defaultQueryTimeoutMs: 0,
+  keepAliveIntervalMs: 20000,
+  patchMessageBeforeSending: (message) => {
+   const requiresPatch = !!(message.buttonsMessage || message.templateMessage || message.listMessage);
+   if (requiresPatch) {
+    message = {
+     viewOnceMessage: {
+      message: {
+       messageContextInfo: {
+        deviceListMetadataVersion: 2,
+        deviceListMetadata: {},
+       },
+       ...message,
+      },
+     },
+    };
+   }
+   return message;
+  },
+ });
 
 //======CONEXÃO POR CODE=========\\
 if (!lux.authState.creds.registered) {
-  console.clear();
-  console.log(chalk.red('\n═══════════════════════════════════════════════════════'));
-  console.log(chalk.bgRed.white(' INÍCIO DO EMPARELHAMENTO '));
-  console.log(chalk.red('═══════════════════════════════════════════════════════\n'));
+ console.clear();
+ console.log(chalk.red('\n═══════════════════════════════════════════════════════'));
+ console.log(chalk.bgRed.white(' INÍCIO DO EMPARELHAMENTO '));
+ console.log(chalk.red('═══════════════════════════════════════════════════════\n'));
 
-  rl.question(chalk.hex('#ff0044')('📱  Número do bot: '), async (phoneNumber) => {
-    if (!phoneNumber) {
-      console.log('\n❌ Nenhum número inserido. Ritual cancelado.');
-      rl.close();
-      process.exit(1);
-    }
+ rl.question(chalk.hex('#ff0044')('📱 Número do bot: '), async (phoneNumber) => {
+  if (!phoneNumber) {
+   console.log('\n❌ Nenhum número inserido. Ritual cancelado.');
+   rl.close();
+   process.exit(1);
+  }
 
-    const NumeroLimpo = phoneNumber.replace(/[^0-9]/g, '');
-    console.log('\n🔮 Invocando código...');
-    const code = await lux.requestPairingCode(NumeroLimpo);
+  const NumeroLimpo = phoneNumber.replace(/[^0-9]/g, '');
+  console.log('\n🔮 Invocando código...');
+  const code = await lux.requestPairingCode(NumeroLimpo);
 
-    console.log(chalk.green('\n✅ Código de emparelhamento: ') + chalk.bold.white(code));
-    rl.close();
-  });
+  console.log(chalk.green('\n✅ Código de emparelhamento: ') + chalk.bold.white(code));
+  rl.close();
+ });
 }
 
 //=======CLIENTES=======\\
@@ -171,8 +171,6 @@ const dono = ['556199317165@s.whatsapp.net']
 lux.ev.on('messages.upsert', async ({ messages }) => {
 try {
 const info = messages[0]
-if (!info.message) return
-
 const from = info.key.remoteJid;
 const type = baileys.getContentType(info.message);
 const body = (type === 'conversation') ?
@@ -205,11 +203,11 @@ const Dispositivo = info.key.id.length > 21 ? '📱 Android' : info.key.id.subst
 let timestamp = speed();
 let latensi = speed() - timestamp;
 function formatTime(seconds) {
-  const days = Math.floor(seconds / (3600 * 24));
-  const hours = Math.floor((seconds % (3600 * 24)) / 3600);
-  const minutes = Math.floor((seconds % 3600) / 60);
-  const secs = Math.floor(seconds % 60);
-  return `${days}d ${hours}h ${minutes}m ${secs}s`;
+ const days = Math.floor(seconds / (3600 * 24));
+ const hours = Math.floor((seconds % (3600 * 24)) / 3600);
+ const minutes = Math.floor((seconds % 3600) / 60);
+ const secs = Math.floor(seconds % 60);
+ return `${days}d ${hours}h ${minutes}m ${secs}s`;
 }
 
 
@@ -225,28 +223,28 @@ if (infoUser && body) { modificarUsuario(sender, parseInt(infoUser.mensagemEnvia
 
 // Verificação de registro
 if (!infoUser && comandoNome !== "login" && isCmd) {
-  return enviar(`⚠️ Acesso negado. Use *${prefix}login* para selar seu vínculo comigo.`);
+ return enviar(`⚠️ Acesso negado. Use *${prefix}login* para selar seu vínculo comigo.`);
 }
 
 // Identificação do tipo de mensagem recebida
 const tipoMensagem = 
-  type === 'audioMessage'     ? 'Áudio' :
-  type === 'stickerMessage'   ? 'Figurinha' :
-  type === 'imageMessage'     ? 'Imagem' :
-  type === 'videoMessage'     ? 'Vídeo' :
-  type === 'documentMessage'  ? 'Documento' :
-  type === 'contactMessage'   ? 'Contato' :
-  type === 'locationMessage'  ? 'Localização' : 'Texto';
+ type === 'audioMessage'   ? 'Áudio' :
+ type === 'stickerMessage'  ? 'Figurinha' :
+ type === 'imageMessage'   ? 'Imagem' :
+ type === 'videoMessage'   ? 'Vídeo' :
+ type === 'documentMessage' ? 'Documento' :
+ type === 'contactMessage'  ? 'Contato' :
+ type === 'locationMessage' ? 'Localização' : 'Texto';
 
 // Identificação do nome do chat
 let nomeChat = '[Privado]';
 if (isGroup) {
-  try {
-    const metadata = await lux.groupMetadata(from);
-    nomeChat = `[Grupo: ${metadata.subject}]`;
-  } catch {
-    nomeChat = '[Grupo: Desconhecido]';
-  }
+ try {
+  const metadata = await lux.groupMetadata(from);
+  nomeChat = `[Grupo: ${metadata.subject}]`;
+ } catch {
+  nomeChat = '[Grupo: Desconhecido]';
+ }
 }
 
 // Logs
@@ -254,30 +252,30 @@ if (isCmd) {
 console.log( chalk.hex('#ff0044')(`${chalk.bold(pushname)} executou`) + ' ' + chalk.bgHex('#ff0044').black(` ${prefix}${comandoNome} `) + ' ' + chalk.hex('#ff0044')(`em ${nomeChat}`) );
 } 
 else if (tipoMensagem === 'Imagem') {
-  console.log(
-    chalk.hex('#8a2be2')(`${chalk.bold(pushname)} enviou uma Imagem em ${nomeChat}`)
-  );
+ console.log(
+  chalk.hex('#8a2be2')(`${chalk.bold(pushname)} enviou uma Imagem em ${nomeChat}`)
+ );
 } 
 else if (tipoMensagem === 'Áudio') {
-  console.log(
-    chalk.hex('#00ced1')(`${chalk.bold(pushname)} enviou um Áudio em ${nomeChat}`)
-  );
+ console.log(
+  chalk.hex('#00ced1')(`${chalk.bold(pushname)} enviou um Áudio em ${nomeChat}`)
+ );
 } 
 else if (tipoMensagem === 'Vídeo') {
-  console.log(
-    chalk.hex('#ff8c00')(`${chalk.bold(pushname)} enviou um Vídeo em ${nomeChat}`)
-  );
+ console.log(
+  chalk.hex('#ff8c00')(`${chalk.bold(pushname)} enviou um Vídeo em ${nomeChat}`)
+ );
 }
 else if (tipoMensagem === 'Figurinha') {
-  console.log(
-    chalk.hex('#ff69b4')(`${chalk.bold(pushname)} enviou uma Figurinha em ${nomeChat}`)
-  );
+ console.log(
+  chalk.hex('#ff69b4')(`${chalk.bold(pushname)} enviou uma Figurinha em ${nomeChat}`)
+ );
 }
 else {
-  console.log(
-    chalk.hex('#cccccc')(`${chalk.bold(pushname)} enviou uma Mensagem em ${nomeChat}`) +
-    chalk.dim(` → "${body?.slice(0, 50) || '...'}"`)
-  );
+ console.log(
+  chalk.hex('#cccccc')(`${chalk.bold(pushname)} enviou uma Mensagem em ${nomeChat}`) +
+  chalk.dim(` → "${body?.slice(0, 50) || '...'}"`)
+ );
 }
 //=======SELOS=======\\
 const selo = {key: {fromMe: false, participant: '0@s.whatsapp.net'}, message: { "extendedTextMessage": {"text": `*A noite brilha novamente*`,"title": null,'thumbnailUrl': null}}}
@@ -379,12 +377,12 @@ break;
 
 //MENSAGENS RÁPIDAS
 const msg = {
-  espera: "- *A noite sussurra... apenas aguarde, meu poder está se preparando.*",
-  dono: "- *Você não carrega a marca do mestre... este comando pertence ao senhor do abismo.*",
-  query: "- *Ecoei teus desejos no vazio... mas não encontrei o que procuras.*",
-  adm: "- *Somente os generais do submundo têm acesso a este comando... e você ainda não é um deles.*",
-  admBot: "- *Me negaram o trono deste reino... preciso ser coroado administrador para agir.*",
-  vip: "- *As chamas do privilégio não tocam qualquer alma... este poder é dos escolhidos.*",
+ espera: "- *A noite sussurra... apenas aguarde, meu poder está se preparando.*",
+ dono: "- *Você não carrega a marca do mestre... este comando pertence ao senhor do abismo.*",
+ query: "- *Ecoei teus desejos no vazio... mas não encontrei o que procuras.*",
+ adm: "- *Somente os generais do submundo têm acesso a este comando... e você ainda não é um deles.*",
+ admBot: "- *Me negaram o trono deste reino... preciso ser coroado administrador para agir.*",
+ vip: "- *As chamas do privilégio não tocam qualquer alma... este poder é dos escolhidos.*",
 }
 
 //COMANDOS USANDO PLUGIN
@@ -413,8 +411,8 @@ console.log(chalk.bgGreen.white.bold(" VÍNCULO SELADO ") + chalk.green(" - O pa
 );
 console.log(chalk.bgBlack.greenBright.bold(" ONLINE ") + chalk.green(" - As trevas despertaram, o bot está ativo."));
 console.log(chalk.red('\n═══════════════════════════════════════════════════════'));
-  console.log(chalk.bgRed.white(' LOG DE MENSAGENS RECEBIDAS'));
-  console.log(chalk.red('═══════════════════════════════════════════════════════\n'));
+ console.log(chalk.bgRed.white(' LOG DE MENSAGENS RECEBIDAS'));
+ console.log(chalk.red('═══════════════════════════════════════════════════════\n'));
 } 
 
 else if (connection === 'connecting') {

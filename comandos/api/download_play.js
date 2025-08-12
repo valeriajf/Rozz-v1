@@ -1,4 +1,4 @@
-const { prefix, botName } = require("../../dono/config.json")
+const { prefix, botName, donoName, DarkApikey, DarkUrl } = require("../../dono/config.json")
 const { ytMp3, ytVideosSearch } = require("../../lux/js/scraper.js")
 
 module.exports = {
@@ -12,7 +12,7 @@ if (!q) return enviar(msg.query)
 reagir("⌛")
 const query = args.join(" ")
 const { resultado } = await ytVideosSearch(query)
-const audio = await ytMp3(resultado[0].url)
+const audio = `${DarkUrl}/api/download/youtube-audio?url=${resultado[0].url}&apikey=${DarkApikey}`
 const texto = `          *⌬『 🎧 𝐉𝐀𝐂𝐊 𝐁𝐎𝐓 𝐌𝐔𝐒𝐈𝐂 』⌬*
 
 🔍 𝐑𝐞𝐬𝐮𝐥𝐭𝐚𝐝𝐨𝐬: *${resultado.length}*

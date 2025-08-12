@@ -3,7 +3,7 @@
 </h1>
 <p align="center">
   <img title="Criador" src="https://img.shields.io/badge/Criador-Pedrozz%20Mods-green.svg?style=for-the-badge&logo=github">
-  <img title="Versão" src="https://img.shields.io/badge/Versão-1.0.0-red.svg?style=for-the-badge&logo=github">
+  <img title="Versão" src="https://img.shields.io/badge/Versão-1.0.5-red.svg?style=for-the-badge&logo=github">
 </p>
 
 <p align="center">
