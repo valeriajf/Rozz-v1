@@ -13,6 +13,6 @@ if (isDono) { vip = true; saldo = 500000; } else { vip = false; saldo: 0; }
 try { slaw = await client.profilePictureUrl(`${sender.split('@')[0]}@c.us`, 'image'); shortpc = await axios.get(`https://tinyurl.com/api-create.php?url=${slaw}`); foto = shortpc.data; } catch(e) { foto = 'https://telegra.ph/file/9c472f0ed2499de52e2f5.jpg' }
 try { bio = (await client.fetchStatus(sender)).status } catch { status = "Pedrozz Mods sempre dominando... ou não kkk" }
 registrarUsuario1(sender, pushname, saldo, vip, bio, foto)
-enviar("- *Parabéns! Seu Registro foi feito com sucesso 😃👌*")
+enviar("- *Parabéns! Seu Registro foi feito com sucesso*")
   },
 };

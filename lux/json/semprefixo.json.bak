@@ -1,0 +1,32 @@
+[
+  {
+    "tipo": "audio",
+    "link": "https://www.myinstants.com/media/sounds/bom-dia-magnata.mp3",
+    "chave": ["bom dia"]
+  },
+  {
+    "tipo": "audio",
+    "link": "https://www.myinstants.com/media/sounds/se-eu-largar-o-freio-oficial.mp3",
+    "chave": ["louça"]
+  },
+  {
+  "tipo": "reagir",
+  "mensagem": "😂",
+  "chave": ["kk", "haha", "ksks"]
+  },
+  {
+  "tipo": "mensagem",
+  "mensagem": "Olá",
+  "chave": ["Oi"]
+  },
+  {
+  "tipo": "sticker",
+  "link": "/storage/emulated/0/rozzbot/lux/imagem/rozz-1.webp",
+  "chave": ["Rozz"]
+  },
+  {
+  "tipo": "sticker",
+  "link": "/storage/emulated/0/rozzbot/lux/imagem/Regras.webp",
+  "chave": ["Bem vinde"]
+  }
+]

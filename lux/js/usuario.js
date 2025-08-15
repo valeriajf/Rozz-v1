@@ -108,7 +108,7 @@ carregarDadosUsuarios
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {
 fs.unwatchFile(file)
-console.log(`Eii você ja ta mechendo?😑\nAs Alterações foram salvas - '${__filename}'`)
+console.log(`Eii você ja ta mexendo?😑\nAs Alterações foram salvas - '${__filename}'`)
 delete require.cache[file]
 require(file)
 })

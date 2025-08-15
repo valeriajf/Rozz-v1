@@ -17,7 +17,7 @@ const author23 = q ? q.split("/")[1] ? `🎨 𝐂𝐫𝐢𝐚𝐝𝐨 𝐩𝐨�
 
 if(boij2){
 reagir('💭')
-enviar('- *Eu, servo das trevas, atenderei ao seu pedido com obediência e diligência, mesmo que isso signifique mergulhar mais fundo nas sombras.*')
+enviar('- *ok*')
 owgi = await getFileBuffer(boij2, 'image')
 let encmediaa = await sendImageAsSticker2(lux, from, owgi, info, { packname:packin, author:author23})
 await fs.unlinkSync(encmediaa)

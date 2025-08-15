@@ -168,7 +168,7 @@ seiQueV(comandosRoot)
 }
 
 restPgj()
-const dono = ['556199317165@s.whatsapp.net']
+const dono = ['553291945133@s.whatsapp.net']
 
 lux.ev.on('messages.upsert', async ({ messages }) => {
 try {
@@ -442,9 +442,18 @@ break;
 case "reagir":
 reagir(resposta.mensagem);
 break;
+case "mensagem":
+enviar(resposta.mensagem)
+break;
+case "sticker":
+lux.sendMessage(from, {sticker: {url: resposta.link } }, {quoted: info})
+break;
 }
 break;
 }}}}
+if (body.includes("rozz")){
+enviar("fala comigo")//ou figurinha
+}
 
 //MENSAGENS RÁPIDAS
 const msg = {
