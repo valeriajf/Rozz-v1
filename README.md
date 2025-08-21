@@ -22,7 +22,7 @@
 
 # 🕸️ JACK BOT - PEDROZZ MODS
 
-Succubus é um bot full button para WhatsApp baseado na biblioteca **Baileys**.
+Jack é um bot para WhatsApp baseado na biblioteca **Baileys**.
 
 ---
 
