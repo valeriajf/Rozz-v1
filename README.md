@@ -2,9 +2,6 @@
   <p>
     <img src="https://files.catbox.moe/mm3coi.png" alt="JACK" width="720">
   </p>
-  <p>
-    <a href="#"><img title="Jack" src="https://img.shields.io/badge/Jack Bot-red?style=for-the-badge"></a>
-  </p>
 </h1>
 
 <p align="center">
@@ -83,17 +80,17 @@ cd /sdcard/Jack-Bot && sh start.sh
 ![image](https://user-images.githubusercontent.com/51442719/149520330-b3bce735-5a57-481d-b122-fda4e2052cf8.png)
 
 ### Atualizando o bot:
-**Salva as mudanças feitas
+**Salva as mudanças feitas**
 ```bash
 git stash
 ```
 
-**Puxando as atualizações do repositório
+**Puxando as atualizações do repositório**
 ```bash
 git pull origin main
 ```
 
-**Restaurando as alterações
+**Restaurando as alterações**
 ```bash
 git stash pop
 ```
