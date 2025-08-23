@@ -34,7 +34,7 @@ const useMobile = process.argv.includes("--mobile")
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout })
 const question = (text) => new Promise((resolve) => rl.question(text, resolve))
 //============CONFIG==========\\
-const { prefix, botName } = require("./dono/config.json")
+const { prefix, botName, donoNumero } = require("./dono/config.json")
 const verMsg = true; //True = ativo, False = desativado.
 
 //const { menu } = require("./lux/js/menu.js");
@@ -50,37 +50,37 @@ const { state, saveCreds } = await useMultiFileAuthState('./dono/jack-qr')
 const { version, isLatest } = await fetchLatestBaileysVersion()
 const msgRetryCounterCache = new NodeCache()
 const lux = makeWASocket({
-  version,
-  auth: {
-   creds: state.creds,
-   keys: makeCacheableSignalKeyStore(state.keys, pino({ level: 'silent' })),
-  },
-  logger: pino({ level: 'silent' }),
-  printQRInTerminal: !process.argv.includes("--code"),
-  mobile: false,
-  browser: ['Ubuntu','Edge','125.0.0.0'],
-  generateHighQualityLinkPreview: true,
-  msgRetryCounterCache,
-  connectTimeoutMs: 60000,
-  defaultQueryTimeoutMs: 0,
-  keepAliveIntervalMs: 20000,
-  patchMessageBeforeSending: (message) => {
-   const requiresPatch = !!(message.buttonsMessage || message.templateMessage || message.listMessage);
-   if (requiresPatch) {
-    message = {
-     viewOnceMessage: {
-      message: {
-       messageContextInfo: {
-        deviceListMetadataVersion: 2,
-        deviceListMetadata: {},
-       },
-       ...message,
-      },
-     },
-    };
-   }
-   return message;
-  },
+version,
+auth: {
+ creds: state.creds,
+ keys: makeCacheableSignalKeyStore(state.keys, pino({ level: 'silent' })),
+},
+logger: pino({ level: 'silent' }),
+printQRInTerminal: !process.argv.includes("--code"),
+mobile: false,
+browser: ['Ubuntu','Edge','125.0.0.0'],
+generateHighQualityLinkPreview: true,
+msgRetryCounterCache,
+connectTimeoutMs: 60000,
+defaultQueryTimeoutMs: 0,
+keepAliveIntervalMs: 20000,
+patchMessageBeforeSending: (message) => {
+ const requiresPatch = !!(message.buttonsMessage || message.templateMessage || message.listMessage);
+ if (requiresPatch) {
+message = {
+ viewOnceMessage: {
+message: {
+ messageContextInfo: {
+deviceListMetadataVersion: 2,
+deviceListMetadata: {},
+ },
+ ...message,
+},
+ },
+};
+ }
+ return message;
+},
  });
 
 //======CONEXÃO POR CODE=========\\
@@ -91,18 +91,18 @@ if (!lux.authState.creds.registered) {
  console.log(chalk.red('═══════════════════════════════════════════════════════\n'));
 
  rl.question(chalk.hex('#ff0044')('📱 Número do bot: '), async (phoneNumber) => {
-  if (!phoneNumber) {
-   console.log('\n❌ Nenhum número inserido. Ritual cancelado.');
-   rl.close();
-   process.exit(1);
-  }
+if (!phoneNumber) {
+ console.log('\n❌ Nenhum número inserido. Ritual cancelado.');
+ rl.close();
+ process.exit(1);
+}
 
-  const NumeroLimpo = phoneNumber.replace(/[^0-9]/g, '');
-  console.log('\n🔮 Invocando código...');
-  const code = await lux.requestPairingCode(NumeroLimpo);
+const NumeroLimpo = phoneNumber.replace(/[^0-9]/g, '');
+console.log('\n🔮 Invocando código...');
+const code = await lux.requestPairingCode(NumeroLimpo);
 
-  console.log(chalk.green('\n✅ Código de emparelhamento: ') + chalk.bold.white(code));
-  rl.close();
+console.log(chalk.green('\n✅ Código de emparelhamento: ') + chalk.bold.white(code));
+rl.close();
  });
 }
 
@@ -115,7 +115,37 @@ lux.ev.on('chats.set', () => { console.log('setando conversas...'); })
 lux.ev.on('contacts.set', () => { console.log('setando contatos...'); })
 lux.ev.on('creds.update', saveCreds)
 
-//========ATT DE MENSAGENS=========\\
+// === Carregar verificações ===
+let verificacoes = {};
+const pastaVerif = path.join(__dirname, "verificacoes");
+
+function loadVerificacoes() {
+verificacoes = {};
+fs.readdirSync(pastaVerif).forEach(file => {
+if (file.endsWith(".js")) {
+const fullPath = path.join(pastaVerif, file);
+delete require.cache[require.resolve(fullPath)];
+
+try {
+const nome = file.replace(".js", "");
+verificacoes[nome] = require(fullPath);
+} catch (err) {
+console.error(`[✘] Erro ao carregar ${file}:`, err);
+}
+}
+});
+}
+
+function watchVerificacoes() {
+fs.watch(pastaVerif, (eventType, filename) => {
+if (filename && filename.endsWith(".js")) {
+loadVerificacoes();
+}
+});
+}
+loadVerificacoes();
+watchVerificacoes();
+
 // === Carrega todos os plugins ===
 const comandos = new Map()
 function loadComandos() {
@@ -168,7 +198,40 @@ seiQueV(comandosRoot)
 }
 
 restPgj()
-const dono = ['556199317165@s.whatsapp.net']
+const dono = [`${donoNumero}@s.whatsapp.net`]
+
+lux.ev.on('group-participants.update', async (bemVindo) => {
+const { id, action } = bemVindo;
+const from = id;
+const isGroup = from.endsWith('@g.us');
+const groupMetadata = isGroup ? await lux.groupMetadata(from): ""
+const groupName = isGroup  ? groupMetadata.subject: ""
+const sender = bemVindo.participants[0];
+const PastaDeGrupos2 = `./lux/json/grupos/${from}.json`
+const ArquivosDosGrupos2 = isGroup ? JSON.parse(fs.readFileSync(PastaDeGrupos2)) : undefined;
+
+if (ArquivosDosGrupos2[0].bemvindo){
+if (action === "add") {
+textin = ArquivosDosGrupos2[0].bv[0].entrou
+.replace('%numero%', bemVindo.participants[0].split('@')[0])
+.replace('%nomeGrupo%', groupName)
+lux.sendMessage(from, {text: textin})
+} else if (action === "remove"){
+textin = ArquivosDosGrupos2[0].bv[0].saiu
+.replace('%numero%', bemVindo.participants[0].split('@')[0])
+.replace('%nomeGrupo%', groupName)
+lux.sendMessage(from, {text: textin})
+}
+}
+
+if (ArquivosDosGrupos2[0].fake){
+if (!sender.startsWith("55")) {
+await enviar(`⚠️ Número ${sender.split('@')[0]} bloqueado (não permitido neste grupo).`);
+await new Promise(r => setTimeout(r, 1000));
+await lux.groupParticipantsUpdate(from, [sender], "remove");
+}}
+
+});
 
 lux.ev.on('messages.upsert', async ({ messages }) => {
 try {
@@ -224,28 +287,35 @@ if (infoUser && type === 'stickerMessage') { modificarUsuario(sender, parseInt(i
 if (infoUser && body) { modificarUsuario(sender, parseInt(infoUser.mensagemEnviada) + 1, "mensagemEnviada") }
 
 // Verificação de registro
-if (!infoUser && comandoNome !== "login" && isCmd) {
+const isLogin = false
+if (isLogin && !infoUser && comandoNome !== "login" && isCmd) {
  return enviar(`⚠️ Acesso negado. Use *${prefix}login* para selar seu vínculo comigo.`);
+} else {
+let vip; let saldo;
+if (isDono) { vip = true; saldo = 500000; } else { vip = false; saldo: 0; }
+try { slaw = await lux.profilePictureUrl(`${sender.split('@')[0]}@c.us`, 'image'); shortpc = await axios.get(`https://tinyurl.com/api-create.php?url=${slaw}`); foto = shortpc.data; } catch(e) { foto = 'https://telegra.ph/file/9c472f0ed2499de52e2f5.jpg' }
+try { bio = (await lux.fetchStatus(sender)).status } catch { bio = "Pedrozz Mods sempre dominando... ou não kkk" }
+registrarUsuario1(sender, pushname, saldo, vip, bio, foto)
 }
 
 // Identificação do tipo de mensagem recebida
 const tipoMensagem = 
- type === 'audioMessage'   ? 'Áudio' :
- type === 'stickerMessage'  ? 'Figurinha' :
- type === 'imageMessage'   ? 'Imagem' :
- type === 'videoMessage'   ? 'Vídeo' :
+ type === 'audioMessage' ? 'Áudio' :
+ type === 'stickerMessage'? 'Figurinha' :
+ type === 'imageMessage' ? 'Imagem' :
+ type === 'videoMessage' ? 'Vídeo' :
  type === 'documentMessage' ? 'Documento' :
- type === 'contactMessage'  ? 'Contato' :
+ type === 'contactMessage'? 'Contato' :
  type === 'locationMessage' ? 'Localização' : 'Texto';
 
 // Identificação do nome do chat
 let nomeChat = '[Privado]';
 if (isGroup) {
  try {
-  const metadata = await lux.groupMetadata(from);
-  nomeChat = `[Grupo: ${metadata.subject}]`;
+const metadata = await lux.groupMetadata(from);
+nomeChat = `[Grupo: ${metadata.subject}]`;
  } catch {
-  nomeChat = '[Grupo: Desconhecido]';
+nomeChat = '[Grupo: Desconhecido]';
  }
 }
 
@@ -255,34 +325,34 @@ console.log( chalk.hex('#ff0044')(`${chalk.bold(pushname)} executou`) + ' ' + ch
 } 
 else if (tipoMensagem === 'Imagem') {
  console.log(
-  chalk.hex('#8a2be2')(`${chalk.bold(pushname)} enviou uma Imagem em ${nomeChat}`)
+chalk.hex('#8a2be2')(`${chalk.bold(pushname)} enviou uma Imagem em ${nomeChat}`)
  );
 } 
 else if (tipoMensagem === 'Áudio') {
  console.log(
-  chalk.hex('#00ced1')(`${chalk.bold(pushname)} enviou um Áudio em ${nomeChat}`)
+chalk.hex('#00ced1')(`${chalk.bold(pushname)} enviou um Áudio em ${nomeChat}`)
  );
 } 
 else if (tipoMensagem === 'Vídeo') {
  console.log(
-  chalk.hex('#ff8c00')(`${chalk.bold(pushname)} enviou um Vídeo em ${nomeChat}`)
+chalk.hex('#ff8c00')(`${chalk.bold(pushname)} enviou um Vídeo em ${nomeChat}`)
  );
 }
 else if (tipoMensagem === 'Figurinha') {
  console.log(
-  chalk.hex('#ff69b4')(`${chalk.bold(pushname)} enviou uma Figurinha em ${nomeChat}`)
+chalk.hex('#ff69b4')(`${chalk.bold(pushname)} enviou uma Figurinha em ${nomeChat}`)
  );
 }
 else if (isGroup){
  console.log(
-  chalk.hex('#cccccc')(`${chalk.bold(pushname)} enviou uma Mensagem em ${nomeChat}`) +
-  chalk.dim(` → "${body?.slice(0, 50) || '...'}"`)
+chalk.hex('#cccccc')(`${chalk.bold(pushname)} enviou uma Mensagem em ${nomeChat}`) +
+chalk.dim(` → "${body?.slice(0, 50) || '...'}"`)
  );
 }
 else {
 console.log(
-  chalk.hex('#cccccc')(`${chalk.bold(pushname)} enviou uma Mensagem em ${nomeChat}`) +
-  chalk.dim(` → "${body?.slice(0, 50) || '...'}"`)
+chalk.hex('#cccccc')(`${chalk.bold(pushname)} enviou uma Mensagem em ${nomeChat}`) +
+chalk.dim(` → "${body?.slice(0, 50) || '...'}"`)
  );
 }
 //=======SELOS=======\\
@@ -400,7 +470,8 @@ fs.mkdirSync(pastinhaDosGrupos, { recursive: true });
 const PastaDeGrupos = `${pastinhaDosGrupos}${from}.json`;
 if (isGroup && !fs.existsSync(PastaDeGrupos)) {
 var datea = [{
-name: metadata.subject, antilink: false, autoResposta: false, 
+name: metadata.subject, antilink: false, afk: true, fake: false, bemvindo: false, bv: [{entrou: "Seja bem vindo as trevas", saiu: null}], autoResposta: false, 
+ausente: []
 }];
 fs.writeFileSync(PastaDeGrupos, JSON.stringify(datea, null, 2) + '\n');
 }
@@ -456,14 +527,30 @@ const msg = {
  vip: "- *As chamas do privilégio não tocam qualquer alma... este poder é dos escolhidos.*",
 }
 
+
+if (isGroup && ArquivosDosGrupos) {
+const configGrupo = ArquivosDosGrupos[0];
+for (let [nome, funcao] of Object.entries(verificacoes)) {
+if (configGrupo[nome]) {
+const bloqueou = await funcao({ info, reagir, isGroup, body, enviar, hora, data, client: lux, from, sender, ModificaGrupo, ArquivosDosGrupos });
+if (bloqueou) return;
+}
+}
+}
 //COMANDOS USANDO PLUGIN
 if (body.startsWith(prefix)) {
 if (comandos.has(comandoNome)) {
-const comando = comandos.get(comandoNome)
-if (comando.permissao === 'dono' && !isDono) return enviar(msg.dono)
-if (comando.permissao === 'adm' && !isAdm) return enviar(msg.adm)
-if (comando.permissao === 'vip' && !isPremium) return enviar(msg.vip)
-await comando.handle({ pastaLux, msg, fotomenu, lux, fetchJson, client: lux, enviar, enviarAi, reagir, reply, enviarImg, enviarImg2, enviarGif, enviarGif2, enviarVd, enviarVd2, enviarAd, enviarAd2, data, hora, esperar, selo, info, args, q, sender, from, groupMembers, numeroBot, dono, menc, pushname, isDono, isAdm, Dispositivo, isPremium, infoUser, registrarUsuario1, infoUser1, modificarsaldo, registrarAposta, modificarUsuario, carregarDadosUsuarios, latensi, uptimeBot: formatTime(process.uptime()), ModificaGrupo, ArquivosDosGrupos, catBoxUpload, fetchJson, getBuffer, sendImageAsSticker, sendVideoAsSticker, sendImageAsSticker2, sendVideoAsSticker2, getFileBuffer});
+const comando = comandos.get(comandoNome);
+
+//PERMISSÕES
+if (comando.permissao === 'dono' && !isDono) return enviar(msg.dono);
+if (comando.permissao === 'adm' && !isAdm) return enviar(msg.adm);
+if (comando.permissao === 'vip' && !isPremium) return enviar(msg.vip);
+
+await comando.handle({
+pastaLux, msg, fotomenu, lux, fetchJson, client: lux, enviar, enviarAi, reagir, reply, enviarImg, enviarImg2, enviarGif, enviarGif2, enviarVd, enviarVd2, enviarAd, enviarAd2, data, hora, esperar, selo, info, args, q, sender, from, groupMembers, numeroBot, dono, menc, pushname, isDono, isAdm, Dispositivo, isPremium, infoUser, registrarUsuario1, infoUser1, modificarsaldo, registrarAposta, modificarUsuario, carregarDadosUsuarios, latensi, uptimeBot: formatTime(process.uptime()), ModificaGrupo, ArquivosDosGrupos, catBoxUpload, fetchJson, getBuffer, sendImageAsSticker, sendVideoAsSticker, sendImageAsSticker2, sendVideoAsSticker2, getFileBuffer
+});
+
 } else {
 lux.sendMessage(from, { text: `- *Nem mesmo as trevas entenderam esse comando...\nToque *${prefix}menu* e revele o grimório completo.*` }, { quoted: selo });
 }

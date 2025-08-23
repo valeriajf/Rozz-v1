@@ -15,13 +15,18 @@ client.sendMessage(from, {image: {url: fotomenu}, caption: `╭═════�
 ┃╰══════════════════⪨
 ╰╦══════════════════⪨
 ╭┤⟪ *COMANDOS ADM* ⟫
-┃│░⃟⃛🕸️༘݊➮ ${prefix}abrirgp
-┃│░⃟⃛🕸️༘݊➮ ${prefix}fechargp
-┃│░⃟⃛🕸️༘݊➮ ${prefix}marcar
-┃│░⃟⃛🕸️༘݊➮ ${prefix}citar (Query)
-┃│░⃟⃛🕸️༘݊➮ ${prefix}ban (@)
-┃│░⃟⃛🕸️༘݊➮ ${prefix}menujogos
-┃│░⃟⃛🕸️༘݊➮ ${prefix}auto-resposta 1/0
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}abrirgp
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}fechargp
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}marcar
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}citar (Query)
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}ban (@)
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}menujogos
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}auto-resposta 1/0
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}antifake 1/0
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}antilink 1/0
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}bemvindo 1/0
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}legendabv (legenda)
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}legendasaiu (legenda)
 ╰═══════════════════⪨` }, {quoted: selo})
   },
 };

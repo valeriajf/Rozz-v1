@@ -1,9 +1,10 @@
 {
-"prefix": ":",
-"botName": "⿻྅⃕ 𝐽𝑎𝑐𝑘ˢᵖᵉᵉᵈ᭥ꩌ゚໋ꦿི🤡",
+"prefix": "/",
+"botName": "𝐽𝑎𝑐𝑘ˢᵖᵉᵉᵈ",
 "donoName": "𝙿𝚎𝚍𝚛𝚘𝚣𝚣 𝙼𝚘𝚍𝚜",
+"donoNumero": "556199317165",
 "DarkUrl": "https://dksapis.online",
-"DarkApikey": "SUAKEY",
+"DarkApikey": "APIKEY",
 "emoji": "🕸️",
-"version": "1.0.5"
+"version": "1.0.9"
 }

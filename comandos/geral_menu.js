@@ -20,68 +20,71 @@ await client.sendMessage(from, {image: {url: fotomenu}, caption: `╭═══�
 ┃╰══════════════════⪨
 ╰╦══════════════════⪨
 ╭┤⟪ *MENUS* ⟫
-┃│░⃟⃛🕸️༘݊➮ ${prefix}menu
-┃│░⃟⃛🕸️༘݊➮ ${prefix}menudono
-┃│░⃟⃛🕸️༘݊➮ ${prefix}menuadm
-┃│░⃟⃛🕸️༘݊➮ ${prefix}menujogos
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}menu
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}menudono
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}menuadm
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}menujogos
 ┃╰══════════════════⪨
 ╰╦══════════════════⪨
 ╭┤⟪ *DOWNLOADS* ⟫
-┃│░⃟⃛🕸️༘݊➮ ${prefix}play (nome)
-┃│░⃟⃛🕸️༘݊➮ ${prefix}playvd (prompt)
-┃│░⃟⃛🕸️༘݊➮ ${prefix}tuna (pesquisa)
-┃│░⃟⃛🕸️༘݊➮ ${prefix}tiktokquery (pesquisa)
-┃│░⃟⃛🕸️༘݊➮ ${prefix}tiktok (url)
-┃│░⃟⃛🕸️༘݊➮ ${prefix}insta (url)
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}play (nome)
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}playvd (prompt)
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}tuna (pesquisa)
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}tiktokquery (pesquisa)
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}tiktok (url)
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}insta (url)
 ┃╰══════════════════⪨
 ╰╦══════════════════⪨
 ╭┤⟪ *PESQUISA* ⟫
-┃│░⃟⃛🕸️༘݊➮ ${prefix}ytsearch (pesquisa)
-┃│░⃟⃛🕸️༘݊➮ ${prefix}filme (pesquisa)
-┃│░⃟⃛🕸️༘݊➮ ${prefix}serie (pesquisa)
-┃│░⃟⃛🕸️༘݊➮ ${prefix}signo (pesquisa)
-┃│░⃟⃛🕸️༘݊➮ ${prefix}xvideos (pesquisa)
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}ytsearch (pesquisa)
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}filme (pesquisa)
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}serie (pesquisa)
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}signo (pesquisa)
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}xvideos (pesquisa)
 ┃╰══════════════════⪨
 ╰╦══════════════════⪨
 ╭┤⟪ *INTELIGÊNCIAS* ⟫
-┃│░⃟⃛🕸️༘݊➮ ${prefix}gemini (prompt)
-┃│░⃟⃛🕸️༘݊➮ ${prefix}llama (prompt)
-┃│░⃟⃛🕸️༘݊➮ ${prefix}llama2 (prompt)
-┃│░⃟⃛🕸️༘݊➮ ${prefix}sqlcode (prompt)
-┃│░⃟⃛🕸️༘݊➮ ${prefix}mistral (prompt)
-┃│░⃟⃛🕸️༘݊➮ ${prefix}deepseek (prompt)
-┃│░⃟⃛🕸️༘݊➮ ${prefix}deepseek-code (prompt)
-┃│░⃟⃛🕸️༘݊➮ ${prefix}dalle (prompt)
-┃│░⃟⃛🕸️༘݊➮ ${prefix}dalle2 (prompt)
-┃│░⃟⃛🕸️༘݊➮ ${prefix}imagine (prompt)
-┃│░⃟⃛🕸️༘݊➮ ${prefix}ghibli (prompt)
-┃│░⃟⃛🕸️༘݊➮ ${prefix}fantasia (prompt)
-┃│░⃟⃛🕸️༘݊➮ ${prefix}3d (prompt)
-┃│░⃟⃛🕸️༘݊➮ ${prefix}tattoo (prompt)
-┃│░⃟⃛🕸️༘݊➮ ${prefix}cartoon (prompt)
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}gemini (prompt)
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}llama (prompt)
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}llama2 (prompt)
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}sqlcode (prompt)
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}mistral (prompt)
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}deepseek (prompt)
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}deepseek-code (prompt)
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}dalle (prompt)
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}dalle2 (prompt)
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}imagine (prompt)
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}ghibli (prompt)
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}fantasia (prompt)
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}3d (prompt)
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}tattoo (prompt)
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}cartoon (prompt)
 ┃╰══════════════════⪨
 ╰╦══════════════════⪨
 ╭┤⟪ *RANDOM* ⟫
-┃│░⃟⃛🕸️༘݊➮ ${prefix}clima (query)
-┃│░⃟⃛🕸️༘݊➮ ${prefix}tradutor (query)
-┃│░⃟⃛🕸️༘݊➮ ${prefix}cuttly (link)
-┃│░⃟⃛🕸️༘݊➮ ${prefix}bitly (link)
-┃│░⃟⃛🕸️༘݊➮ ${prefix}metadinha
-┃│░⃟⃛🕸️༘݊➮ ${prefix}metadinha2
-┃│░⃟⃛🕸️༘݊➮ ${prefix}travazapimg
-┃│░⃟⃛🕸️༘݊➮ ${prefix}travazapimg2
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}clima (query)
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}tradutor (query)
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}cuttly (link)
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}bitly (link)
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}metadinha
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}metadinha2
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}travazapimg
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}travazapimg2
 ┃╰══════════════════⪨
 ╰╦══════════════════⪨
 ╭┤⟪ *STICKER* ⟫
-┃│░⃟⃛🕸️༘݊➮ ${prefix}s (imagem/video/gif)
-┃│░⃟⃛🕸️༘݊➮ ${prefix}stickerai (Query)
-┃│░⃟⃛🕸️༘݊➮ ${prefix}attp (Query)
-┃│░⃟⃛🕸️༘݊➮ ${prefix}attp2 (Query)
-┃│░⃟⃛🕸️༘݊➮ ${prefix}among (Query)
-┃│░⃟⃛🕸️༘݊➮ ${prefix}figubebe (Num)
-┃│░⃟⃛🕸️༘݊➮ ${prefix}figucoreana (Num)
-┃│░⃟⃛🕸️༘݊➮ ${prefix}figuanime (Num)
-┃│░⃟⃛🕸️༘݊➮ ${prefix}figurinhas (Num)
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}s (imagem/video/gif)
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}stickerai (Query)
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}attp (Query)
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}attp2 (Query)
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}attp3 (Query)
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}attp4 (Query)
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}attp5 (Query)
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}among (Query)
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}figubebe (Num)
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}figucoreana (Num)
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}figuanime (Num)
+┃│░⃟⃛${emoji}༘݊➮ ${prefix}figurinhas (Num)
 ┃╰══════════════════⪨
 ╰═══════════════════⪨` }, {quoted: selo})
   },

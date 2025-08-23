@@ -1,81 +1,129 @@
 <h1 align="center">
-  <img src="https://files.catbox.moe/e8tia1.png" alt="Jack" width="720">
+  <p>
+    <img src="https://files.catbox.moe/mm3coi.png" alt="JACK" width="720">
+  </p>
+  <p>
+    <a href="#"><img title="Jack" src="https://img.shields.io/badge/Jack Bot-red?style=for-the-badge"></a>
+  </p>
 </h1>
+
 <p align="center">
   <img title="Criador" src="https://img.shields.io/badge/Criador-Pedrozz%20Mods-green.svg?style=for-the-badge&logo=github">
-  <img title="Versão" src="https://img.shields.io/badge/Versão-1.0.5-red.svg?style=for-the-badge&logo=github">
+  <img title="Versão" src="https://img.shields.io/badge/Versão-1.0.9-red.svg?style=for-the-badge&logo=github">
 </p>
 
-<p align="center">
-  <a href="https://chat.whatsapp.com/IUWCuqHcWSsIcogrQjP6SX">
-    <img src="https://img.shields.io/badge/Suporte-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="WhatsApp">
+<div align="center">
+  <a href="https://whatsapp.com/channel/0029Vapwu6mATRSeTjjG7M37">
+    <img src="https://img.shields.io/badge/Suporte-25D366?style=for-the-badge&logo=whatsapp&logoColor=white">
   </a>
   <a href="https://instagram.com/pedrozz_13755">
-    <img src="https://img.shields.io/badge/Instagram-FF8C00?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram">
+    <img src="https://img.shields.io/badge/Instagram-FF8C00?style=for-the-badge&logo=instagram&logoColor=white">
   </a>
   <a href="https://www.youtube.com/@pedrozz_Mods">
-    <img src="https://img.shields.io/badge/YouTube-FF0030?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube">
+    <img src="https://img.shields.io/badge/YouTube-FF0030?style=for-the-badge&logo=youtube&logoColor=white">
   </a>
-</p>
+</div>
 
----
+![image](https://user-images.githubusercontent.com/51442719/149520330-b3bce735-5a57-481d-b122-fda4e2052cf8.png)
 
-# 🕸️ JACK BOT - PEDROZZ MODS
+## 🚀 Instalação via Termux
 
-Jack é um bot para WhatsApp baseado na biblioteca **Baileys**.
+**1 - Baixe o Termux**
+> [Clique aqui para baixar o Termux](https://mega.nz/file/uglXFZaT#y6yCfop0vS-DY0cPC9SOInpEO-6tu3ks1xYk91Lj8RI)
 
----
+![image](https://user-images.githubusercontent.com/51442719/149520330-b3bce735-5a57-481d-b122-fda4e2052cf8.png)
 
-## INSTALAÇÃO DO BOT VIA TERMUX
+## 📜 Comandos de Instalação
 
-### Baixar o Termux
-[Baixar o Termux (via Mega)](https://mega.nz/file/uglXFZaT#y6yCfop0vS-DY0cPC9SOInpEO-6tu3ks1xYk91Lj8RI)
+> ⚠️ **Copie e execute um comando por vez. Espere cada um terminar!**
 
----
-
-### Comandos de Instalação (copie e cole um por vez):
-
-> ⚠️ **Importante**: espere cada comando terminar antes de digitar o próximo.
-
-#### 1. Permitir acesso aos arquivos:
+**1 - Dar permissão de armazenamento**
 ```bash
 termux-setup-storage
 ```
 
-#### 2. Atualizar pacotes:
+**2 -  Atualizar pacotes**
 ```bash
 pkg upgrade -y && pkg update -y
 ```
-Se aparecer: `(Y/I/N/O/D/Z) [default=N]`, digite **Y** e pressione Enter.
+> Se pedir (Y/I/N/O/D/Z) [default=N], digite Y e pressione Enter.
 
-#### 3. Instalar dependências básicas:
+**3 - Instalar pacotes essenciais**
 ```bash
 pkg install -y
 ```
 
-#### 4. Instalar Node.js:
+**4 - Instalar Node.js**
 ```bash
 pkg install nodejs
 ```
 
-#### 6. Instalar Git:
+**5 - Instalar Yarn**
+```bash
+pkg install yarn
+```
+
+**6 - Instalar Git**
 ```bash
 pkg install git
 ```
 
-#### 7. Clonar o repositório:
+**7 - Clonar o projeto Laura Privat Stellar**
 ```bash
 cd /sdcard && git clone https://github.com/pedrozzFree/Jack-Bot.git
 ```
 
-#### 8. Iniciar o bot:
+**8 - Entrar na pasta e rodar o script de inicialização**
 ```bash
-cd /sdcard/succubus-bot && sh start.sh
+cd /sdcard/Jack-Bot && sh start.sh
 ```
 
-> Esse comando deve ser usado sempre que for iniciar o bot no terminal.
+> ✅ **Sempre que for ligar o bot, use apenas o último comando.**
 
----
+![image](https://user-images.githubusercontent.com/51442719/149520330-b3bce735-5a57-481d-b122-fda4e2052cf8.png)
+
+### Atualizando o bot:
+```bash
+git stash
+```
+```bash
+git pull origin main
+```
+```bash
+git stash pop
+```
+![image](https://user-images.githubusercontent.com/51442719/149520330-b3bce735-5a57-481d-b122-fda4e2052cf8.png)
+
+## Configuração
+
+Edite o arquivo `dono/config.js` para personalizar o bot:
+
+```json
+{
+"prefix": "/",
+"botName": "𝐽𝑎𝑐𝑘ˢᵖᵉᵉᵈ",
+"donoName": "𝙿𝚎𝚍𝚛𝚘𝚣𝚣 𝙼𝚘𝚍𝚜",
+"donoNumero": "556199317165",
+"DarkUrl": "https://dksapis.online",
+"DarkApikey": "APIKEY",
+"emoji": "🕸️",
+"version": "1.0.9"
+}
+```
+
+> 🔑 Pegue sua **APIKEY** em [https://dksapis.online](https://dksapis.online) para usar comandos como `/play`, `/tiktok` e outros.
+
+![image](https://user-images.githubusercontent.com/51442719/149520330-b3bce735-5a57-481d-b122-fda4e2052cf8.png)
+
+## 🌌 Links Importantes
+
+- [Grupo de Atualizações WA](https://whatsapp.com/channel/0029Vapwu6mATRSeTjjG7M37)
+- [Canal WA](https://whatsapp.com/channel/0029Vapwu6mATRSeTjjG7M37)
+- [Hospedagem Oficial](https://speedhosting.cloud)
+- [Canal YouTube](https://www.youtube.com/@pedrozz_Mods)
+
+![image](https://user-images.githubusercontent.com/51442719/149520330-b3bce735-5a57-481d-b122-fda4e2052cf8.png)
+
 
 ## Licença e Créditos
 
@@ -83,4 +131,3 @@ Este projeto foi desenvolvido por **Pedrozz Mods** e está disponível gratuitam
 
 > O uso comercial é permitido, mas **manter os créditos** é uma forma justa de reconhecimento.
 
----
