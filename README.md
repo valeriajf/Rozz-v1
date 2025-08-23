@@ -68,7 +68,7 @@ pkg install yarn
 pkg install git
 ```
 
-**7 - Clonar o projeto**
+**7 - Clonando o projeto**
 ```bash
 cd /sdcard && git clone https://github.com/pedrozzFree/Jack-Bot.git
 ```
@@ -83,12 +83,17 @@ cd /sdcard/Jack-Bot && sh start.sh
 ![image](https://user-images.githubusercontent.com/51442719/149520330-b3bce735-5a57-481d-b122-fda4e2052cf8.png)
 
 ### Atualizando o bot:
+**Salva as mudanças feitas
 ```bash
 git stash
 ```
+
+**Puxando as atualizações do repositório
 ```bash
 git pull origin main
 ```
+
+**Restaurando as alterações
 ```bash
 git stash pop
 ```
