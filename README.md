@@ -68,7 +68,7 @@ pkg install yarn
 pkg install git
 ```
 
-**7 - Clonar o projeto Laura Privat Stellar**
+**7 - Clonar o projeto**
 ```bash
 cd /sdcard && git clone https://github.com/pedrozzFree/Jack-Bot.git
 ```
