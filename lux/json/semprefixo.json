@@ -1,52 +1,22 @@
 [
   {
     "tipo": "audio",
-    "link": "https://www.myinstants.com/media/sounds/tai-lung-como-nao-posso_NrQYPc2.mp3",
-    "chave": ["motivacao", "raiva", "treino"]
-  },
-  {
-    "tipo": "audio",
-    "link": "https://www.myinstants.com/media/sounds/foi-quando-gyro-finalmente-entendeu.mp3",
-    "chave": ["gyro", "sad", "triste"]
-  },
-  {
-    "tipo": "audio",
-    "link": "https://www.myinstants.com/media/sounds/sua-mae-sabe-que-voce-gosta-de-rapazes.mp3",
-    "chave": ["gay", "viado", "homossexual", "bixa", "viadinho"]
-  },
-  {
-    "tipo": "audio",
     "link": "https://www.myinstants.com/media/sounds/bom-dia-magnata.mp3",
-    "chave": ["bom dia", "bomdia", "magnata"]
-  },
-  {
-    "tipo": "audio",
-    "link": "https://www.myinstants.com/media/sounds/seloco-nao-compensa.mp3",
-    "chave": ["slk", "naocompena", "nao compensa", "não compensa"]
-  },
-  {
-    "tipo": "audio",
-    "link": "https://www.myinstants.com/media/sounds/quero-e-sexo.mp3",
-    "chave": ["sexo", "sexy", "porno"]
-  },
-  {
-    "tipo": "audio",
-    "link": "https://www.myinstants.com/media/sounds/cade-vc-fiadaputa-voce-por-que-nao-trabalha.mp3",
-    "chave": ["trabalho", "cade você", "cade vc", "cade voce", "toma sua ku", "trabaia"]
-  },
-  {
-    "tipo": "audio",
-    "link": "https://www.myinstants.com/media/sounds/que-isso-moreno.mp3",
-    "chave": ["calma", "moreno", "ignorante"]
-  },
-  {
-    "tipo": "audio",
-    "link": "https://www.myinstants.com/media/sounds/se-eu-largar-o-freio-oficial.mp3",
-    "chave": ["pia", "mulher", "muie", "louca", "louça"]
+    "chave": ["bom dia"]
   },
   {
   "tipo": "reagir",
-  "mensagem": "😂",
-  "chave": ["kk", "haha", "kaka"]
+  "mensagem": "❌",
+  "chave": ["Proibido"]
+  },
+  {
+  "tipo": "texto",
+  "mensagem": "Leia as regras e aproveite o grupo",
+  "chave": ["Bem vindo"]
+  },
+  {
+  "tipo": "sticker",
+  "link": "https://i.postimg.cc/JhX5qfw9/STK-20250816-WA0551.webp",
+  "chave": ["Rozz"]
   }
 ]

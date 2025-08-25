@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Squad TesTe 🍥",
+    "antilink": false,
+    "afk": true,
+    "fake": false,
+    "bemvindo": false,
+    "bv": [
+      {
+        "entrou": "Seja bem vindo as trevas",
+        "saiu": null
+      }
+    ],
+    "autoResposta": true,
+    "ausente": [
+      {
+        "ativo": false,
+        "numero": "553291945133",
+        "mensagem": "Estudando"
+      }
+    ]
+  }
+]

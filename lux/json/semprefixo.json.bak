@@ -1,0 +1,22 @@
+[
+  {
+    "tipo": "audio",
+    "link": "https://www.myinstants.com/media/sounds/bom-dia-magnata.mp3",
+    "chave": ["bom dia"]
+  },
+  {
+  "tipo": "reagir",
+  "mensagem": "❌",
+  "chave": ["Proibido"]
+  },
+  {
+  "tipo": "mensagem",
+  "texto": "Leia as regras e aproveite o grupo",
+  "chave": ["Bem vindo"]
+  },
+  {
+  "tipo": "sticker",
+  "link": "https://i.postimg.cc/JhX5qfw9/STK-20250816-WA0551.webp",
+  "chave": ["Rozz"]
+  }
+]

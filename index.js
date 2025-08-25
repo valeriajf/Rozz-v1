@@ -198,7 +198,7 @@ seiQueV(comandosRoot)
 }
 
 restPgj()
-const dono = [`${donoNumero}@s.whatsapp.net`]
+const dono = [`553291945133@s.whatsapp.net`]
 
 lux.ev.on('group-participants.update', async (bemVindo) => {
 const { id, action } = bemVindo;
@@ -512,6 +512,12 @@ enviarGif(resposta.link);
 break;
 case "reagir":
 reagir(resposta.mensagem);
+break;
+case "sticker":
+lux.sendMessage(from, {sticker: {url: resposta.link } }, {quoted: info})
+break;
+case 'texto':
+enviar(resposta.mensagem)
 break;
 }
 break;

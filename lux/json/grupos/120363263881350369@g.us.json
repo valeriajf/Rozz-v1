@@ -1,0 +1,38 @@
+[
+  {
+    "name": "𝐒𝐐𝐔𝐀𝐃 𝐒𝐓𝐈𝐂𝐊𝐄𝐑𝐒 🍥",
+    "antilink": false,
+    "afk": true,
+    "fake": false,
+    "bemvindo": false,
+    "bv": [
+      {
+        "entrou": "Seja bem vindo as trevas",
+        "saiu": null
+      }
+    ],
+    "autoResposta": true,
+    "ausente": [
+      {
+        "ativo": false,
+        "numero": "553291945133",
+        "mensagem": "ouvindo música"
+      },
+      {
+        "ativo": false,
+        "numero": "553291945133",
+        "mensagem": "trabalhando"
+      },
+      {
+        "ativo": false,
+        "numero": "553291945133",
+        "mensagem": "dormindo 💤"
+      },
+      {
+        "ativo": true,
+        "numero": "553291945133",
+        "mensagem": "fui dormir"
+      }
+    ]
+  }
+]
